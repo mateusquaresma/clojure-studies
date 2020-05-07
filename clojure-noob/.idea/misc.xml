@@ -7,14 +7,14 @@
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" project-jdk-name="11.0.5" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/classes" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="SbtLocalSettings">
     <option name="modificationStamps">
       <map>
         <entry key="$USER_HOME$/Documents/workspace/functional-programming/patmat" value="1462390864000" />
-        <entry key="$PROJECT_DIR$/../closeness-centrality-metrics" value="1436237075000" />
+        <entry key="$PROJECT_DIR$/../../closeness-centrality-metrics" value="1436237075000" />
       </map>
     </option>
     <option name="externalProjectsViewState">
