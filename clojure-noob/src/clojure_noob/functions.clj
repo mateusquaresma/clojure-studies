@@ -159,3 +159,77 @@
   [part]
   {:name (clojure.string/replace (:name part) #"^left-" "right-")
    :size (:size part)})
+
+(defn symmetrize-body-parts
+  "Expects a seq of maps that have a :name and a :size"
+  [asym-body-parts]
+  (loop [remaining-asym-parts asym-body-parts
+         final-body-parts []]
+    (if (empty? remaining-asym-parts)
+      final-body-parts
+      (let [[part & remaining] remaining-asym-parts]
+        (recur remaining
+               (into final-body-parts
+                     (set [part (matching-part part)])))))))
+
+;; Breaking it down
+
+;; Understanding let
+
+(let [x 3] x)
+(def dalmatian-list
+  ["Pongo" "Perdita" "Puppy 1" "Puppy 2"])
+(let [dalmatians (take 2 dalmatian-list)]
+  dalmatians)
+
+;; let introduces a new scope
+
+(def x 0)
+(let [x 1] x)                                               ;; returns 1
+(println x)                                                 ;; prints 0
+
+(let [x (inc x)] x)                                         ;; (inc x) diff from returned x
+
+(let [[pongo & dalmatians] dalmatian-list]
+  [pongo dalmatians])
+
+(into [] (set [:a :b]))
+
+(loop [iteration 0]
+  (println (str "Iteration " iteration))
+  (if (> iteration 3)
+    (println "Goodbye!")
+    (recur (inc iteration))))
+
+;; Better symmetrizer with reduce
+
+(reduce + [1 2 3 4])
+
+(defn better-symmetrizer-body-parts
+  "Expects a seq of maps that have a :name and :size"
+  [asym-body-parts]
+  (reduce (fn [final-body-parts part]
+            (into final-body-parts (set [part (matching-part part)])))
+          []
+          asym-body-parts))
+
+(defn hit
+  [asym-body-parts]
+  (let [sym-parts (better-symmetrizer-body-parts asym-body-parts)
+        body-part-size-sum (reduce + (map :size sym-parts))
+        target (rand body-part-size-sum)]
+    ;;(println target body-part-size-sum)
+    (loop [[part & remaining] sym-parts
+           accumulated-size (:size part)]
+      ;;(println accumulated-size)
+      (if (> accumulated-size target)
+        part
+        (recur remaining (+ accumulated-size (:size (first remaining))))))))
+
+;; Exercises
+
+;; Exercise 1
+(str "My name is " "Clojure programmer")
+(defn print-names
+  [names]
+  names)
