@@ -232,4 +232,29 @@
 (str "My name is " "Clojure programmer")
 (defn print-names
   [names]
-  names)
+  (hash-set names))
+
+(defn add10
+  [x]
+  (+ 10 x))
+
+(defn dec-maker
+  [x]
+  #(- % x))
+
+(defn mapset
+  "Should work as the map function but the return type must be a set"
+  [f coll]
+  (loop [[head & tail] coll
+         out-coll #{}]
+    (if (nil? head)
+      out-coll
+      (recur tail (into out-coll [(f head)])))))
+
+(defn better-mapset
+  [f in-coll]
+  (reduce
+    (fn [acc arg]
+      (into acc #{(f arg)}))
+    #{}
+    in-coll))
