@@ -61,7 +61,7 @@
 (conj (list 1 "two" {3 4}) 4)
 
 ; Sets
-#{1 2 3 4 }
+#{1 2 3 4}
 (hash-set 1 1 2 2)
 
 (contains? #{:a :b} :a)
@@ -258,3 +258,46 @@
       (into acc #{(f arg)}))
     #{}
     in-coll))
+
+;; Exercise 5
+
+(defn matching-part
+  [part]
+  {:name (clojure.string/replace (:name part) #"^left-" "right-")
+   :size (:size part)})
+
+(defn gen-part
+  [part prefix]
+  {:name (clojure.string/replace (:name part) #"^left-" (str prefix "-"))
+   :size (:size part)})
+
+(defn generate-parts
+  [part amount]
+  (loop [[head & tail] (map inc (range amount))
+         generated-parts (set [])]
+    (if (nil? head)
+      generated-parts
+      (recur tail
+             (conj generated-parts (gen-part part head))))))
+
+(defn generic-symmetrizer-body-parts
+  "Expects a seq of maps that have a :name and :size"
+  ([asym-body-parts amount]
+   (reduce (fn [final-body-parts part]
+             (into final-body-parts (generate-parts part amount)))
+           []
+           asym-body-parts))
+  ([asym-body-parts]
+   (generic-symmetrizer-body-parts asym-body-parts 2)))
+
+
+
+
+
+
+
+
+
+
+
+
