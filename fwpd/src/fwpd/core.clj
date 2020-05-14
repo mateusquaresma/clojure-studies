@@ -78,3 +78,21 @@
   (if (validate validations new-suspect)
     (conj suspects new-suspect)
     suspects))
+
+
+(defn stringfy
+  "Turns a record in the format {:name 'Dracula' :glitter-index 0} into Dracula,0"
+  [record]
+  (clojure.string/join "," (map #(second %) record)))
+
+(defn back-to-str
+  [records]
+  (clojure.string/join
+    "\n"
+    (reduce (fn [acc record]
+              (conj acc (stringfy record)))
+            []
+            records)))
+
+(def data (mapify (parse (slurp filename))))
+(mapify (parse (back-to-str data)))
