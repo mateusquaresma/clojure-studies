@@ -92,4 +92,72 @@
 
 (str/join (concat (take 8 (repeat "na ")) ["Batman!"]))
 
+(defn even-numbers
+  ([] (even-numbers 0))
+  ([n] (cons n (lazy-seq (even-numbers (+ n 2))))))
+
+(cons 0 '(2 4 6))
+
+;; into
+
+(map identity {:sunlight-reaction "Glitter!"})
+(into {} (map identity {:sunlight-reaction "Glitter!"}))
+
+(map identity [:garlic :sesame-oil :fried-eggs])
+(into [] (map identity [:garlic :sesame-oil :fried-eggs]))
+
+(map identity [:garlic-clove :garlic-clove])
+(into #{} (map identity [:garlic-clove :garlic-clove]))
+
+;; the apply and partial functions
+
+(max 0 1 2)
+(max [0 1 2])
+(apply max [0 1 2])
+
+(defn my-into
+  [target additions]
+  (apply conj target additions))
+
+(my-into [0] [1 2 3])
+
+(def add10 (partial + 10))
+(def add-missing-elements
+  (partial conj ["water" "earth" "air"]))
+
+(defn my-partial
+  [partialized-fn & args]
+  (fn [& more-args]
+    (apply partialized-fn (into args more-args))))
+
+(def add20 (my-partial + 20))
+
+(defn lousy-logger
+  [log-level message]
+  (condp = log-level
+    :warn (clojure.string/lower-case message)
+    :emergency (clojure.string/upper-case message)))
+
+(def warn (partial lousy-logger :warn))
+
+(warn "red light ahead")
+
+(defn identify-humans
+  [social-security-numbers]
+  (filter #(not (vampire? %))
+          (map vampire-related-details social-security-numbers)))
+
+(def not-vampire? (complement vampire?))
+
+(defn identify-humans
+  [social-security-number]
+  (filter not-vampire?
+          (map vampire-related-details social-security-number)))
+
+(identify-humans (range 4))
+
+(defn my-complement
+  [fun]
+  (fn [& args]
+    (not (apply fun args))))
 
