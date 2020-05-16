@@ -1,4 +1,4 @@
-(ns clojure-noob.chapter-4
+(ns cbt-chapters.chapter-4
   (:require [clojure.string :as str]))
 
 (def human-consumption [8.1 7.3 6.6 5.0])

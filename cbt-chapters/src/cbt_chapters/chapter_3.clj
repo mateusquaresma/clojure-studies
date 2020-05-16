@@ -1,4 +1,4 @@
-(ns clojure-noob.chapter-3)
+(ns cbt-chapters.chapter-3)
 
 ; The following code is supposed to by typed in a repl session
 (if true

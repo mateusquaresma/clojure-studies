@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/clojure-noob.iml" filepath="$PROJECT_DIR$/clojure-noob.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cbt-chapters.iml" filepath="$PROJECT_DIR$/cbt-chapters.iml" />
     </modules>
   </component>
 </project>
