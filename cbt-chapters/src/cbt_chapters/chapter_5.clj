@@ -67,20 +67,33 @@
             (rest (reverse fns)))))
 
 ;; Exercise 3
+;(defn my-assoc-in
+;  [m [k & ks] v]
+;  (if (empty? ks)
+;    (assoc {} k v)
+;    (assoc m k (my-assoc-in m ks v) )))
+;;
 (defn my-assoc-in
   [m [k & ks] v]
-  (if (empty? ks)
-    (assoc {} k v)
-    (assoc m k (my-assoc-in m ks v) )))
-;;
+  (if ks
+    (assoc m k (my-assoc-in (get m k) ks v))
+    (assoc m k v)))
 
 ;; Exercise 4 and 5
 
+;(defn my-update-in
+;  [m ks f & args]
+;  (let [new-args (get-in m ks)]
+;    (println(f new-args))))
+
 (defn my-update-in
   [m ks f & args]
-  (let [new-args (get-in m ks)]
-    (println(f new-args))))
-
+  (let [up (fn up [m ks f args]
+             (let [[k & ks] ks]
+               (if ks
+                 (assoc m k (up (get m k) ks f args))
+                 (assoc m k (apply f (get m k) args)))))]
+    (up m ks f args)))
 
 
 
