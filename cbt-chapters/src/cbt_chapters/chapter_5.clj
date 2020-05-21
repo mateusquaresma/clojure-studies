@@ -66,5 +66,27 @@
             (apply (last fns) args)
             (rest (reverse fns)))))
 
+;; Exercise 3
+(defn my-assoc-in
+  [m [k & ks] v]
+  (if (empty? ks)
+    (assoc {} k v)
+    (assoc m k (my-assoc-in m ks v) )))
+;;
+
+;; Exercise 4 and 5
+
+(defn my-update-in
+  [m ks f & args]
+  (let [new-args (get-in m ks)]
+    (println(f new-args))))
+
+
+
+
+
+
+
+
 
 
