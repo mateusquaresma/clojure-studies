@@ -88,3 +88,36 @@
           validations))
 
 (validate order-details order-details-validation)
+
+(defmacro if-valid
+  "Handle validation more concisely"
+  [to-validate validations errors-name & then-else]
+  `(let [~errors-name (validate ~to-validate ~validations)]
+     (if (empty? ~errors-name)
+       ~@then-else)))
+
+;(macroexpand
+;  '(if-valid order-details order-details-validations my-error-name
+;             (println :success)
+;             (println :failure my-error-name)))
+
+;; Exercises
+;; Exercise 1
+
+;(when-valid order-details order-details-validations
+;            (println "It's a success!")
+;            (render :success))
+
+(defmacro when-valid
+  "Should behave similarly to when function"
+  [to-validate validations & then]
+  `(let [errors (validate ~to-validate ~validations)]
+     (if (empty? errors)
+       ~@then)))
+
+(defmacro when-valid
+  "Handle validation more concisely"
+  [to-validate validations errors-name & then]
+  `(let [~errors-name (validate ~to-validate ~validations)]
+     (if (empty? ~errors-name)
+       (do ~@then))))
