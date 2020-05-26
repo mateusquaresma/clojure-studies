@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="LeiningenProjectsManager">
+    <option name="projectFiles">
+      <list>
+        <option value="file://$PROJECT_DIR$/project.clj" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" project-jdk-name="11.0.5" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/classes" />
+  </component>
+  <component name="SbtLocalSettings">
+    <option name="modificationStamps">
+      <map>
+        <entry key="$USER_HOME$/Documents/workspace/functional-programming/patmat" value="1462390864000" />
+        <entry key="$PROJECT_DIR$/../../closeness-centrality-metrics" value="1436237075000" />
+      </map>
+    </option>
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
+  <component name="ScalaSbtSettings">
+    <option name="maximumHeapSize" value="1024" />
+    <option name="vmParameters" value="" />
+  </component>
+</project>
