@@ -15,7 +15,6 @@
             book (gen/elements inventory)]
            {:inventory inventory :book book}))
 
-(prop/for-all )
 
 
 
